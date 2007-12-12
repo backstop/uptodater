@@ -25,6 +25,7 @@ public abstract class ChangeExecutor {
 
     abstract PreparedStatement createStatement() throws SQLException;
 
+
     public static ChangeExecutor createChangeExecutor(final String sqlText) {
         String lowerCaseSqlText = sqlText.trim().toLowerCase();
         if(lowerCaseSqlText.startsWith("call")) {

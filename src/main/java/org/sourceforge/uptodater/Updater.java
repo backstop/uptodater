@@ -265,7 +265,9 @@ public class Updater {
                 try {
                     for (String sqlText : change.getSqlChanges()) {
                         currentSqlText = sqlText;
+                        logger.debug("Executing change " + sqlText);
                         ChangeExecutor.createChangeExecutor(statementPreparer.prepare(sqlText)).execute(conn);
+                        logger.debug("Executed change");
                     }
                 } catch (SQLException e) {
                     if(change.isOptional()) {

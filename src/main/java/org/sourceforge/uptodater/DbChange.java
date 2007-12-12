@@ -1,6 +1,7 @@
 package org.sourceforge.uptodater;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 /* 
  * Created Date: Jan 10, 2005
@@ -21,10 +22,7 @@ public class DbChange implements Comparable{
 
     private static final String META_PREFIX = "uptodater.";
     private static final String OPTIONAL_PARAMETER = META_PREFIX + "optional";
-    private static Set<String> configConstants = new HashSet<String>();
-    static {
-        configConstants.add(OPTIONAL_PARAMETER);
-    }
+    private static final String STATEMENT_SEPARATOR_PARAMETER = META_PREFIX + "statement.separator";
 
     public DbChange(String id, String sqltext, Date created, String description, Date appliedDate) {
         this.sqltext = sqltext;
@@ -80,9 +78,13 @@ public class DbChange implements Comparable{
     }
 
     protected List<String> getSqlChanges() {
+        String statementSeparator = ";";
+        if (configData.containsKey(STATEMENT_SEPARATOR_PARAMETER))
+            statementSeparator = configData.get(STATEMENT_SEPARATOR_PARAMETER);
+        Pattern splitPattern = Pattern.compile(statementSeparator, Pattern.MULTILINE);
         if (sqlChanges == null) {
             sqlChanges = new ArrayList<String>();
-            for(String change : getSqltext().split(";")) {
+            for(String change : splitPattern.split(getSqltext())) {
                 change = change.trim();
                 if(change.length() > 0) {
                     sqlChanges.add(change);
