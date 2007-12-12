@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Incorporating Into Your Build</title>
+        <author email="rapruitt(at)users.sourceforge.net">Andy Pruitt</author>
+    </properties>
+    <body>
+        <section name="How Do I Integrate With An Ant Build?">
+            <p>All you need to do is create a zip file with all of your change scripts.  The zip does not have to
+                contain every change you have ever made.
+            </p>
+<source>
+    <target name="changes-zip" depends="compile" >
+		<zip basedir="${basedir}/dbscripts/updates" destfile="${output}/updates.zip"  />
+	</target>
+</source>
+            <p>Include the generated zip file in your build.    </p>
+
+        </section>
+        <section name="How Do I integrate With A Maven Build?" >
+            <p>Just take a look at the example app in the UpToDater documentation.</p>
+            <source>
+                <postGoal name="war:webapp">
+                    <attainGoal name="zipChanges"/>
+                </postGoal>
+                <goal name="zipChanges">
+                    <zip destfile="${maven.war.webapp.dir}/WEB-INF/classes/dbupdates.zip">
+                        <fileset dir="${maven.war.src}/updates">
+                            <include name="*.sql"/>
+                        </fileset>
+                    </zip>
+                </goal>
+            </source>
+        </section>
+    </body>
+</document>

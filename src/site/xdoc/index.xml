@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Overview</title>
+        <author email="rapruitt(at)users.sourceforge.net">Andy Pruitt</author>
+    </properties>
+    <body>
+        <section name="What Is UpToDater?">
+            <p> UpToDater is a database change management tool for agile teams. Database change scripts are
+                automatically applied whenever the code associated with the database change is deployed on a server.
+	            If you have a large number of database instances, and are deploying new code frequently, UpToDater will
+                make your life much more pleasant.</p>
+ <p>
+                The framework is intended for Java based projects that rely on Ant or Maven.
+                The service can run as an application listener or servlet (in a web application), or as an MBean.
+            </p>
+        </section>
+        <section name="How Does UpToDater Work?">
+            <ol>
+                <li>Write your database update and migration scripts as pure sql files.</li>
+                <li>When you build your application, include the change files with the app. </li>
+                <li>When your app is deployed, the UpToDater compares the changes listed in the app with the changes
+                that have been previously applied to the database, and runs any changes that have not yet been applied.
+                </li>
+            </ol>
+        </section>
+        <section name="Why Should I Use UpToDater?">
+            <p>UpToDater allows you to embed database changes in your application deployment bundle (EAR or WAR). UpToDater
+            is different from the auto creation facility of your ORM because you specify the exact changes that need to
+            occur; nothing occurs behind the scenes or out of your control.  UpToDater also allows you to run data
+            migration queries alongside your DDL
+            update.  UpToDater means agility for application developers, and peace of mind and control for DBA's. </p>
+
+            <p>With UpToDater, you can always find out what changes have and have not been applied to a database with a
+            simple SQL query.</p>
+        </section>
+    </body>
+</document>

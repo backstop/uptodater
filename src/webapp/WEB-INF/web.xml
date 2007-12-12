@@ -1,0 +1,19 @@
+<web-app>
+    <display-name>UpToDater Sample</display-name>
+    <servlet>
+                        <servlet-name>UpToDater</servlet-name>
+                        <servlet-class>org.sourceforge.uptodater.j2ee.UpToDaterServlet</servlet-class>
+                        <init-param>
+                            <param-name>datasource</param-name>
+                            <param-value></param-value>
+                        </init-param>
+                        <init-param>
+                            <param-name>zipfile</param-name>
+                            <param-value>dbupdates.zip</param-value>
+                        </init-param>
+                        <!-- The servlet should load before any business classes access the database. -->
+                        <load-on-startup>1</load-on-startup>
+                    </servlet>
+
+
+</web-app>

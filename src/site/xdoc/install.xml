@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<document>
+    <properties>
+        <title>Installation Guide</title>
+        <author email="rapruitt(at)users.sourceforge.net">Andy Pruitt</author>
+    </properties>
+    <body>
+        <section name="Installing UpToDater">
+          <ol>
+           <li> Make sure that the uptodater.jar file and the following libraries are in your
+                <code>WEB-INF/lib</code>
+                directory (or made available via the classpath to your application server). Refer to the
+                <a href="dependencies.html">dependencies</a>
+                document for the correct version of these libraries. You can download a copy of everything from
+                <a href="http://jakarta.apache.org">jakarta</a> or from your maven repository.
+                                         At a minimum, you must have
+            <ul>
+                <li>commons-logging.jar</li>
+                <li>commons-lang.jar</li>
+                <li>log4j.jar (or an alternative commons-logging implementation)</li>
+            </ul>
+            </li>
+            <li>
+         Define the uptodater in your deployment descriptor.  <p/>
+   <subsection name="To Deploy As A Servlet"> Define a servlet element like the following in your /WEB-INF/web.xml file:
+            <source>
+                <![CDATA[
+<servlet>
+    <servlet-name>UpToDater</servlet-name>
+    <servlet-class>org.sourceforge.uptodater.j2ee.UpToDaterServlet</servlet-class>
+    <init-param>
+    <!-- the jndi name for your datasource -->
+        <param-name>datasource</param-name>
+        <param-value>java:jdbc/YourJdbcPool</param-value>
+    </init-param>
+    <init-param>
+    <!-- the name of the table to use -->
+        <param-name>tablename</param-name>
+        <param-value>uptodater</param-value>
+    </init-param>
+    <init-param>
+    <!-- the zipfile for your changes; for example -->
+        <param-name>zipfile</param-name>
+        <param-value>dbupdates.zip</param-value>
+    </init-param>
+    <!-- The servlet should load before any business classes access the database. -->
+    <load-on-startup>1</load-on-startup>
+</servlet>
+                ]]>
+            </source>
+                </subsection>
+                <subsection name="To Deploy As An MBean On JBoss">Create a SAR archive, and add something like the
+ following to your jboss-service.xml:
+<source>                <![CDATA[
+    <service>
+        <mbean code="org.sourceforge.uptodater.j2ee.jboss.JbossUpToDater" name="uptodater:service=UpToDater">
+          <attribute name="UpDateZip">updates.zip</attribute>
+          <attribute name="DatasourceName">java:jdbc/YourJdbcPool</attribute>
+          <attribute name="TableName">ddlchanges</attribute>
+        </mbean>
+    </service>  ]]>
+                            </source>
+                <p>A generic JMX implementation is also available, see the src for details.</p>
+                </subsection>
+            </li>
+            <li>
+                Create a zipfile containing your change files, and include it in the webapp.
+                See the <a href="about_changefiles.html">change files</a> drafting db update files.
+            </li>
+            <li>
+                Create a table for UpToDater to use.  This should match the tablename you specified in the setup file.
+                There are table create scripts in the src/sql directory.  Here is a sample for SQL Server:
+                <source>
+create table uptodater (
+    sqltext_hash varchar(100) primary key not null,
+    insert_date datetime not null default getdate(),
+    description varchar(250) not null,
+    sqltext text,
+    applied_date datetime
+)
+                </source>
+            </li>
+            </ol>
+        </section>
+
+    </body>
+</document>

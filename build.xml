@@ -1,0 +1,31 @@
+<project default="dist" name="uptodater">
+    <property name="build" value="classes"/>
+    <property name="dist" value="dist"/>
+    <property name="projectName" value="Uptodater"/>
+    <property name="uptodaterJar" value="${dist}/${projectName}.jar"/>
+    <property name="src" value="src/main"/>
+    <property name="lib" value="target/UpToDater/WEB-INF/lib/"/>
+
+    <path id="project.class.path">
+        <fileset dir="${lib}" includes="*.jar"/>
+    </path>
+
+    <target name="compile" description="Compile Uptodater classes">
+        <mkdir dir="${build}"/>
+        <javac srcdir="${src}" destdir="${build}" debug="true">
+            <classpath refid="project.class.path"/>
+        </javac>
+    </target>
+
+    <target name="dist" depends="compile" description="Build XPtracker jar">
+        <mkdir dir="${dist}"/>
+        <jar basedir="${build}" destfile="${uptodaterJar}">
+            <include name="**"/>
+        </jar>
+    </target>
+
+    <target name="clean" description="Clean up">
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+    </target>
+</project>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Changefiles</title>
+        <author email="rapruitt(at)users.sourceforge.net">Andy Pruitt</author>
+    </properties>
+    <body>
+        <section name="Changefiles">
+            <p>
+	            The simplest format for tracking database changes - the format you may already be using - is to keep
+                each changeset in a .sql file.  These files group together changes, and allow you to track them in a
+                version control system.
+            </p>
+            <ul>
+            <li>You should store each script in a separate file.  The contents of the file will be
+            issued as a single sql command.</li>
+            <li>By default, scripts will be applied in alphabetical order.  <strong>Name your script file with the
+ date first.</strong>  A script named 2004-12-13-update-customer-types.sql will always be applied in an intuitive and
+                predictable order.
+ </li>
+                <li><strong>Change files are immutable.</strong> Once a changefile has been committed to your VCS, it
+ should never be edited.  If you need to alter a script that you have already committed, write a new script instead of
+ editing the existing script.
+<p> If someone were to apply your change script, and then the script was
+                subsequently modified, what should happen?  Should the change be reapplied?  No.  Therefore, we track
+                the checksum for each script, and use the checksum to determine whether a candidate change script has
+                already been applied to the selected database. </p>
+
+                </li>
+                <li>At the risk of being obvious, all database change scripts must be stored in a version control system.
+                When a new release is built from the VCS, all database changes should be included automatically.  Also,
+                edits to a script that has already been created and distributed are very very dangerous, and could put the
+                database schema into an inconistent state (from the point of view of the application).</li>
+            </ul>
+
+            <p>Why not use an xml defined format?  Short answer: maybe.  We just haven't had a need for it yet.    </p>
+
+        </section>
+    </body>
+</document>

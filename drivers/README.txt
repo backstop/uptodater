@@ -1,0 +1,1 @@
+Any jar file placed in this directory (eg, a database driver) will be included in classpath for the unit tests.

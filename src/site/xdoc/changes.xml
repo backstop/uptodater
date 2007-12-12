@@ -1,0 +1,16 @@
+<document>
+  <properties>
+    <title>Changes</title>
+    <author email="rapruitt at users.sourceforge.net">Andy Pruitt</author>
+  </properties>
+  <body>
+
+    <release version=".80" date="in CVS">
+      <action dev="rapruitt" type="add">
+        Initial development.
+      </action>
+    </release>
+
+
+  </body>
+</document>

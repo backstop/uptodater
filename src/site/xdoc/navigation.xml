@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="Maven xdoc Plugin">
+
+  <!-- Page Title -->
+  <title>UpToDater</title>
+
+  <body>
+
+    <!-- Links defined across the top right of the site -->
+    <links>
+      <item name="Maven"  href="http://maven.apache.org/"/>
+    </links>
+
+    <!-- Menu in the Left Navigation -->
+    <menu name="Introduction">
+      <!-- Standalone item -->
+      <item name="Home" href="/index.html" />
+      <item name="Installing" href="/install.html" />
+      <item name="About Changefiles" href="/about_changefiles.html" />
+
+
+    </menu>
+  </body>
+</project>

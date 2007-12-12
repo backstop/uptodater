@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>UpToDater</groupId>
+  <artifactId>UpToDater</artifactId>
+  <name>UpToDater</name>
+  <version>.8</version>
+
+  <organization>
+    <name>sourceforge</name>
+    <url>http://sourceforge.net</url>
+  </organization>
+    <build>
+        <plugins>
+            <plugin>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                <source>1.5</source>
+                <target>1.5</target>
+              </configuration>
+            </plugin>
+
+        </plugins>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <resources>
+          <resource>
+            <directory>src/main/resources</directory>
+          </resource>
+        </resources>
+        <testResources>
+            <testResource>
+              <directory>src/test/resources</directory>
+              <includes>
+                 <include>**/*.properties</include>
+              </includes>
+            </testResource>
+          <testResource>
+            <directory>drivers</directory>
+    <!--            <directory>${uptodater.driver-dir}</directory>-->
+
+        </testResource>
+        </testResources>
+
+    </build>
+    <!-- build information for the project -->
+
+
+  <inceptionYear>2003</inceptionYear>
+  
+  <description>Database DML Update Tool</description>
+  
+  <url>http://UpToDater.sourceforge.net</url>
+
+  <scm>
+    <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/uptodater:uptodater</connection>
+    <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/uptodater</url>
+  </scm>
+
+
+  <!-- any mailing lists for the project -->
+  <mailingLists>
+    <mailingList>
+      <name>UpToDater User Mailing list</name>
+
+      <subscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-user</subscribe>
+      <unsubscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-user</unsubscribe>
+
+      <archive>http://sourceforge.net/mailarchive/forum.php?forum=uptodater-user</archive>
+    </mailingList>
+    <mailingList>
+      <name>UpToDater Developer Mailing list</name>
+      <subscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-devel</subscribe>
+      <unsubscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-devel</unsubscribe>
+      <archive>http://sourceforge.net/mailarchive/forum.php?forum=uptodater-devel</archive>
+    </mailingList>
+    <mailingList>
+      <name>UpToDater Cvs Mailing list</name>
+      <subscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-cvs</subscribe>
+      <unsubscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-cvs</unsubscribe>
+      <archive>http://sourceforge.net/mailarchive/forum.php?forum=uptodater-cvs</archive>
+    </mailingList>
+  </mailingLists>
+
+  <!-- who the developers are for the project -->
+  <developers>
+     <developer>
+        <name>Andy Pruitt</name>
+        <id>rapruitt</id>
+        <email>rapruitt AT users.sourceforge.net</email>
+        <organization>Sourceforge</organization>
+        <timezone>-6</timezone>
+      </developer>
+     <developer>
+        <name>Jeff Zellman</name>
+        <id>jzellman</id>
+        <email>jzellman AT users.sourceforge.net</email>
+        <organization>Sourceforge</organization>
+        <timezone>-6</timezone>
+      </developer>
+  </developers>
+
+  <!-- jar files the project is dependent on       -->
+  <dependencies>
+	  <dependency>
+		  <groupId>commons-lang</groupId>
+		  <artifactId>commons-lang</artifactId>
+		  <version>2.0</version>
+			  
+	  </dependency>
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>1.0.4</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>avalon-framework</artifactId>
+            <groupId>avalon-framework</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>logkit</artifactId>
+            <groupId>logkit</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>log4j</artifactId>
+            <groupId>log4j</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.8</version>
+    </dependency>
+    <dependency>
+      <groupId>servletapi</groupId>
+      <artifactId>servletapi</artifactId>
+      <version>2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jboss</groupId>
+      <artifactId>jboss-system</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jboss</groupId>
+      <artifactId>jboss-system</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jboss</groupId>
+      <artifactId>jboss-jmx</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jmock</groupId>
+      <artifactId>jmock</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+  </dependencies>
+
+
+  <!-- List of activated reports -->
+  <reports>
+    <report>maven-license-plugin</report>
+    <report>maven-changes-plugin</report>
+    <report>maven-javadoc-plugin</report>
+<!--    <report>maven-checkstyle-plugin</report>-->
+    <report>maven-pmd-plugin</report>
+    <report>maven-junit-report-plugin</report>
+<!--    <report>maven-jxr-plugin</report>-->
+    <report>maven-junit-report-plugin</report>
+<!--    <report>maven-tasklist-plugin</report>-->
+<!--    <report>maven-simian-plugin</report>-->
+<!--    <report>maven-changelog-plugin</report>-->
+<!--    <report>maven-file-activity-plugin</report>-->
+<!--    <report>maven-developer-activity-plugin</report>-->
+    <!--<report>maven-statcvs-plugin</report>-->
+<!--    <report>maven-linkcheck-plugin</report>-->
+    <!--<report>maven-sitevalidator-plugin</report>-->
+  </reports>
+
+</project>

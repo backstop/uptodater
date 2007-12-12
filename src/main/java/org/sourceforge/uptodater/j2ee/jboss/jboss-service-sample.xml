@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<service>
+	<mbean code="org.sourceforge.uptodater.j2ee.jboss.JbossUpToDater" name="uptodater:service=UpToDater">
+	  <attribute name="UpDateZip">updates.zip</attribute>
+	  <attribute name="DatasourceName">java:jdbc/YourJdbcPool</attribute>
+	  <attribute name="TableName">ddlchanges</attribute>
+	</mbean>
+</service>
