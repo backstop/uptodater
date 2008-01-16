@@ -225,7 +225,7 @@ public abstract class UpToDateRunner  {
             }
             logger.debug("" + newScriptsPresent + " db changes required.");
             updater.executeChanges(updater.getUnappliedChanges());
-            logger.info("Executed " + newScriptsPresent+ " scripts.");
+            logger.info("Executed " + newScriptsPresent+ " new scripts.");
         } catch (UpdateFailureException e) {
             logger.error("\n\nUpdate(s) " + e.getOriginalSql() + " failed \n\n");
             throw new ConfigurationException("Update(s) " + e.getOriginalSql() + " failed", e.getCause());

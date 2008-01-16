@@ -78,7 +78,7 @@ public abstract class ChangeExecutor {
                         stmt.execute();
                     } catch (SQLException e) {
                         if (isOptional()) {
-                            logger.warn("Optional statement failed to run: " + sqlText, e);
+                            logger.warn("Optional statement failed to run: " + sqlText + " \n        error was " + e.getMessage());
                         } else {
                             throw e;
                         }
