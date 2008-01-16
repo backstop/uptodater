@@ -2,6 +2,8 @@ package org.sourceforge.uptodater;
 
 import junit.framework.TestCase;
 
+import java.util.Date;
+
 public class ChangeExecutorTest extends TestCase {
 
     public void testChangeExecutor() throws Exception {
@@ -15,6 +17,19 @@ public class ChangeExecutorTest extends TestCase {
         changeExecutor = ChangeExecutor.createChangeExecutor(callableChangeExecutorText);
         assertNotNull(changeExecutor);
         assertTrue(changeExecutor instanceof ChangeExecutor.CallableChangeExecutor);
+
+    }
+
+    public void testOptionalHint() {
+        String optionalThing = "-- optional\n" +
+                " this ain't even sql";
+        ChangeExecutor ce = ChangeExecutor.createChangeExecutor(optionalThing);
+        assertTrue(ce.isOptional());
+        String notOptionalThing = "\n" +
+                " this ain't even sql";
+        ce = ChangeExecutor.createChangeExecutor(notOptionalThing);
+        assertFalse(ce.isOptional());
+
 
     }
 
