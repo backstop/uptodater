@@ -2,7 +2,7 @@
     <property name="build" value="classes"/>
     <property name="dist" value="dist"/>
     <property name="projectName" value="UpToDater"/>
-    <property name="version" value=".9.2" />
+    <property name="version" value=".9.3" />
     <property name="uptodaterJar" value="${dist}/${projectName}-${version}.jar"/>
     <property name="src" value="src/main"/>
     <property name="lib" value="lib"/>

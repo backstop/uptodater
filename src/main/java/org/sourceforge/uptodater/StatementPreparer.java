@@ -13,7 +13,7 @@ public class StatementPreparer {
 
     public StatementPreparer(ConfigData configData) {
         this.configData = configData;
-        pattern = Pattern.compile("(\\{.*?\\})");
+        pattern = Pattern.compile("([^\\\\]\\{.*?[^\\\\]\\})");
     }
 
     public String prepare(final String statement) throws ConfigurationException{
@@ -25,13 +25,16 @@ public class StatementPreparer {
             key = key.substring(1, key.length() - 1);
             String replacement = configData.get(key, null);
             if(replacement == null) {
-                String errorMessage = "Configuration error, expecting property " + key + ", but was not found";
+                String errorMessage = "Configuration error, expecting property " + key + ", but was not found.  Does your sql have a string with unescaped {braces}?";
                 ConfigurationException exception = new ConfigurationException(errorMessage);
                 logger.error(exception);
                 throw exception;
             }
             toReplace = toReplace.replace(match, replacement);
         }
+
+        toReplace = toReplace.replace("\\{", "{");
+        toReplace = toReplace.replace("\\}", "}");
         return toReplace;
     }
 }
