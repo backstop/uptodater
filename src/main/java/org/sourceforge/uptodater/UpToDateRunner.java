@@ -243,7 +243,7 @@ public abstract class UpToDateRunner  {
      * same database
      * @return true by default if system is configured to run uptodater
      */
-    boolean isInactive() {
+    protected boolean isInactive() {
         String value = configData.get(IS_ACTIVE_KEY, "true");
         return !Boolean.parseBoolean(value);
     }

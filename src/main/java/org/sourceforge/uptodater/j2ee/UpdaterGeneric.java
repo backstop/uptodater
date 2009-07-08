@@ -17,6 +17,7 @@ public abstract class UpdaterGeneric extends UpToDateRunner implements UpdaterGe
     protected String updateZip;
     protected String datasourceName;
     protected String tableName = Updater.DEFAULT_TABLE_NAME;
+    protected Boolean isActive;
 
     /**
      * Default (no-args) Constructor
@@ -67,6 +68,13 @@ public abstract class UpdaterGeneric extends UpToDateRunner implements UpdaterGe
      */
     public void setTableName(String tableName) {
         this.tableName = tableName;
+    }
+
+    /**
+     * @jmx.managed-attribute
+     */
+    public Boolean getIsActive() {
+        return !isInactive();
     }
 
     public void start() throws Exception {

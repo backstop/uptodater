@@ -2,14 +2,29 @@
     <property name="build" value="classes"/>
     <property name="dist" value="dist"/>
     <property name="projectName" value="UpToDater"/>
-    <property name="version" value=".9.3" />
-    <property name="uptodaterJar" value="${dist}/${projectName}-${version}.jar"/>
     <property name="src" value="src/main"/>
     <property name="lib" value="lib"/>
 
     <path id="project.class.path">
         <fileset dir="${lib}" includes="*.jar"/>
     </path>
+
+    <target name="getRevision">
+        <exec executable="svn" outputproperty="version">
+            <arg line="info"/>
+            <redirector>
+                <outputfilterchain>
+                    <linecontainsregexp>
+                        <regexp pattern='^Revision'/>
+                    </linecontainsregexp>
+                    <tokenfilter>
+                        <replaceregex pattern='[\D]+([\d]+)' replace="\1"/>
+                    </tokenfilter>
+                </outputfilterchain>
+            </redirector>
+        </exec>
+        <property name="uptodaterJar" value="${dist}/${projectName}-${version}.jar"/>
+    </target>
 
     <target name="compile" description="Compile Uptodater classes">
         <mkdir dir="${build}"/>
@@ -18,7 +33,7 @@
         </javac>
     </target>
 
-    <target name="dist" depends="compile" description="Build XPtracker jar">
+    <target name="dist" depends="compile,getRevision" description="Build jar">
         <mkdir dir="${dist}"/>
         <jar basedir="${build}" destfile="${uptodaterJar}">
             <include name="**"/>

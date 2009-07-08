@@ -15,6 +15,7 @@ public interface UpdaterGenericMBean {
     void setDatasourceName(String name);
     String getTableName();
     void setTableName(String nameOfTable);
+    Boolean getIsActive();
 
     void start() throws Exception;
     void init() throws Exception;
