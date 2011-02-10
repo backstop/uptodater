@@ -163,21 +163,7 @@ public class Updater {
 //        assert description != null;
 //        assert text != null;
 
-        boolean alreadyApplied = false;
-        if (!existingCommands.contains(text)) {
-            // Some datbases - eg sqlserver - have odd case sensitivities;
-            // this check should not be necessary
-            for(String cmd : existingCommands) {
-                if (cmd.equalsIgnoreCase(text)) {
-                    alreadyApplied = true;
-                    break;
-                }
-            }
-        } else {
-            alreadyApplied = true;
-        }
-
-        if (!alreadyApplied) {
+        if (!alreadyApplied(text)) {
             PreparedStatement pstmt = null;
             md.reset();
             md.update(text.getBytes());
@@ -192,6 +178,21 @@ public class Updater {
                 DBUtil.close(pstmt);
             }
             existingCommands.add(text);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean alreadyApplied(String text) {
+        if (!existingCommands.contains(text)) {
+            // Some databases - eg sqlserver - have odd case sensitivities;
+            // this check should not be necessary
+            for(String cmd : existingCommands) {
+                if (cmd.equalsIgnoreCase(text)) {
+                    return true;
+                }
+            }
+        } else {
             return true;
         }
         return false;

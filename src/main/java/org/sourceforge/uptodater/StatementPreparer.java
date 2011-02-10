@@ -13,7 +13,7 @@ public class StatementPreparer {
 
     public StatementPreparer(ConfigData configData) {
         this.configData = configData;
-        pattern = Pattern.compile("([^\\\\]\\{.*?[^\\\\]\\})");
+        pattern = Pattern.compile("(?<!\\\\)(\\{.*?[^\\\\]\\})");
     }
 
     public String prepare(final String statement) throws ConfigurationException{

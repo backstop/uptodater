@@ -6,7 +6,7 @@
   <groupId>UpToDater</groupId>
   <artifactId>UpToDater</artifactId>
   <name>UpToDater</name>
-  <version>.8</version>
+  <version>.9</version>
 
   <organization>
     <name>sourceforge</name>
@@ -164,6 +164,11 @@
       <groupId>jmock</groupId>
       <artifactId>jmock</artifactId>
       <version>1.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.jopt-simple</groupId>
+      <artifactId>jopt-simple</artifactId>
+      <version>3.2</version>
     </dependency>
   </dependencies>
 

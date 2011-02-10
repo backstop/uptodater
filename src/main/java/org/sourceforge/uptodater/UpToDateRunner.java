@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -184,11 +185,16 @@ public abstract class UpToDateRunner  {
         }
     }
 
-    public void doUpdate()  {
-        if(isInactive()) {
-            return;
-        }
+    public boolean hasUnappliedUpdates() {
+        return !doUpdate(true).isEmpty();
+    }
 
+    public void doUpdate()  {
+        doUpdate(false);
+    }
+
+    public List<String> doUpdate(boolean dryRun) {
+        List<String> appliedScriptNames = new ArrayList<String>();
         Updater updater = new Updater(getTableName());
         String zipfile = getZipOverride();
         if(StringUtils.isBlank(zipfile)) {
@@ -198,6 +204,9 @@ public abstract class UpToDateRunner  {
             throw new ConfigurationException("The update zipfile name has not been set.");
         }
         InputStream is = getClass().getClassLoader().getResourceAsStream(zipfile);
+        if (is == null) {
+            throw new ConfigurationException(String.format("File not found in classpath: %s", zipfile));
+        }
         SortedMap<String,String> scriptsMap;
         try {
             scriptsMap = new TreeMap<String,String>(Updater.loadScriptsFromZipFile(is));
@@ -211,20 +220,25 @@ public abstract class UpToDateRunner  {
             }
         Connection conn;
         try {
-
             int newScriptsPresent = 0;
             conn = getConnection();
             updater.initialize(conn);
+            boolean noUpdate = dryRun || isInactive();
             for(String source : scriptsMap.keySet()) {
                 String contents =  scriptsMap.get(source);
-                if (updater.update( source, contents)) {
-                    logger.info("Queuing change " + source + " for application.");
-                    logger.debug("Queuing change " + source + " for application - " + contents);
+                if (noUpdate && !updater.alreadyApplied(contents)) {
+                    logApplied(appliedScriptNames, source, contents);
+                } else if (updater.update(source, contents)) {
+                    logApplied(appliedScriptNames, source, contents);
                     newScriptsPresent++;
                 }
             }
             logger.debug("" + newScriptsPresent + " db changes required.");
             updater.executeChanges(updater.getUnappliedChanges());
+
+            if (noUpdate) {
+                logger.info("UpToDater is NOT Enabled!");
+            }
             logger.info("Executed " + newScriptsPresent+ " new scripts.");
         } catch (UpdateFailureException e) {
             logger.error("\n\nUpdate(s) " + e.getOriginalSql() + " failed \n\n");
@@ -236,6 +250,13 @@ public abstract class UpToDateRunner  {
         } finally {
             updater.close();
         }
+        return appliedScriptNames;
+    }
+
+    private void logApplied(List<String> appliedScriptNames, String source, String contents) {
+        logger.info("Queuing change " + source + " for application.");
+        logger.debug("Queuing change " + source + " for application - " + contents);
+        appliedScriptNames.add(source);
     }
 
     /**

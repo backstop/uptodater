@@ -17,6 +17,8 @@ public interface UpdaterGenericMBean {
     void setTableName(String nameOfTable);
     Boolean getIsActive();
 
+    boolean hasUnappliedUpdates();
+
     void start() throws Exception;
     void init() throws Exception;
     void stop() throws Exception;

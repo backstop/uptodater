@@ -18,18 +18,18 @@ import java.text.SimpleDateFormat;
  * @author rapruitt
  */
 
-public class UpToDateTest extends TestCase {
+public class UpToDateManual extends TestCase {
     private String zipFile = "updates.zip";
     ResourceBundle bundle = ResourceBundle.getBundle("UpToDater");
 
     String tableName = "ddlchanges_test";
 
-    public UpToDateTest(String str) {
+    public UpToDateManual(String str) {
         super(str);
     }
 
     public static TestSuite suite() {
-        return new TestSuite(UpToDateTest.class);
+        return new TestSuite(UpToDateManual.class);
     }
 
     protected Connection getConnection() throws ClassNotFoundException, SQLException {
