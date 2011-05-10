@@ -77,9 +77,7 @@ public abstract class UpToDateRunner  {
     protected abstract String getUpDateZip();
 
 
-    public String getTableName(){
-        return Updater.DEFAULT_TABLE_NAME;
-    }
+    public abstract String getTableName();
 
     public String showUnappliedUpdates() throws Exception {
         Updater updater = new Updater(getTableName());

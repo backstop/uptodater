@@ -26,6 +26,11 @@ public abstract class ServletContextRunner extends UpToDateRunner {
         return updateZip;
     }
 
+    @Override
+    public String getTableName() {
+        return tablename;
+    }
+
     public void doUpdate() {
         ServletContext ctx = getServletContext();
         dataSourceName = ctx.getInitParameter(DATASOURCE_NAME);

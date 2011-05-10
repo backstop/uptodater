@@ -37,6 +37,11 @@ public class UpToDateRunnerTest extends TestCase {
         protected String getUpDateZip() {
             return null;
         }
+
+        @Override
+        public String getTableName() {
+            return Updater.DEFAULT_TABLE_NAME;
+        }
     }
 }
 
