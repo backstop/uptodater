@@ -234,10 +234,10 @@ public abstract class UpToDateRunner  {
             logger.debug("" + newScriptsPresent + " db changes required.");
             updater.executeChanges(updater.getUnappliedChanges());
 
-            if (noUpdate) {
+            if (isInactive()) {
                 logger.info("UpToDater is NOT Enabled!");
             }
-            logger.info("Executed " + newScriptsPresent+ " new scripts.");
+            logger.info((dryRun ? "Would have " : "") + "Executed " + newScriptsPresent+ " new scripts.");
         } catch (UpdateFailureException e) {
             logger.error("\n\nUpdate(s) " + e.getOriginalSql() + " failed \n\n");
             throw new ConfigurationException("Update(s) " + e.getOriginalSql() + " failed", e.getCause());
