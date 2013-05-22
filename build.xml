@@ -23,7 +23,7 @@
                 </outputfilterchain>
             </redirector>
         </exec>
-        <property name="uptodaterJar" value="${dist}/${projectName}-${version}.jar"/>
+        <property name="uptodaterJar" value="${dist}/${projectName}-r${version}.jar"/>
     </target>
 
     <target name="compile" description="Compile Uptodater classes">
