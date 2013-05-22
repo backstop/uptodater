@@ -1,17 +1,14 @@
 package org.sourceforge.uptodater;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.lang.StringUtils;
-
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.*;
 
 
@@ -27,6 +24,7 @@ public abstract class UpToDateRunner  {
     */
     protected Log logger;
 
+    protected static final String UPTODATER_SESSION_INITIALIZATION_SQL_KEY = "uptodater.sessionInitializationSql";
     protected static final String IS_ACTIVE_KEY = "uptodater.active";
     protected static final String ZIP_NAME_KEY = "uptodater.override.zip";
 
@@ -83,7 +81,7 @@ public abstract class UpToDateRunner  {
         Updater updater = new Updater(getTableName());
         try {
             Connection conn = getConnection();
-            updater.initialize(conn);
+            updater.initialize(conn, configData.get(UPTODATER_SESSION_INITIALIZATION_SQL_KEY, ""));
             List unapplied = updater.getUnappliedChanges();
             StringBuffer changeSummary = new StringBuffer();
             for (Iterator iterator = unapplied.iterator(); iterator.hasNext();) {
@@ -106,7 +104,7 @@ public abstract class UpToDateRunner  {
         Updater updater = new Updater(getTableName());
         try {
             Connection conn = getConnection();
-            updater.initialize(conn);
+            updater.initialize(conn, configData.get(UPTODATER_SESSION_INITIALIZATION_SQL_KEY, ""));
             List unapplied = updater.getUnappliedChanges();
             ArrayList changesToApply = new ArrayList();
             for (Iterator iterator = unapplied.iterator(); iterator.hasNext();) {
@@ -129,7 +127,7 @@ public abstract class UpToDateRunner  {
         Updater updater = new Updater(getTableName());
         try {
             Connection conn = getConnection();
-            updater.initialize(conn);
+            updater.initialize(conn, configData.get(UPTODATER_SESSION_INITIALIZATION_SQL_KEY, ""));
             updater.deleteChange(updateId);
         } catch (Exception e) {
             String eMessage = "Error deleting update(s) for id " + updateId + ": " + e.getClass().getName() + ": " + e.getMessage();
@@ -144,7 +142,7 @@ public abstract class UpToDateRunner  {
         Updater updater = new Updater(getTableName());
         try {
             Connection conn = getConnection();
-            updater.initialize(conn);
+            updater.initialize(conn, configData.get(UPTODATER_SESSION_INITIALIZATION_SQL_KEY, ""));
             updater.markAsApplied(updateId);
         } catch (Exception e) {
             String eMessage = "Error marking update as applied for id " + updateId + ": " + e.getClass().getName() + ": " + e.getMessage();
@@ -161,7 +159,7 @@ public abstract class UpToDateRunner  {
         since.add(Calendar.DAY_OF_YEAR, -30);
         try {
             Connection conn = getConnection();
-            updater.initialize(conn);
+            updater.initialize(conn, configData.get(UPTODATER_SESSION_INITIALIZATION_SQL_KEY, ""));
             List unapplied = updater.getChanges(since.getTime(), new Date());
             StringBuffer changeSummary = new StringBuffer();
             for (Iterator iterator = unapplied.iterator(); iterator.hasNext();) {
@@ -220,7 +218,7 @@ public abstract class UpToDateRunner  {
         try {
             int newScriptsPresent = 0;
             conn = getConnection();
-            updater.initialize(conn);
+            updater.initialize(conn, configData.get(UPTODATER_SESSION_INITIALIZATION_SQL_KEY, ""));
             boolean noUpdate = dryRun || isInactive();
             for(String source : scriptsMap.keySet()) {
                 String contents =  scriptsMap.get(source);

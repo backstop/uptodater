@@ -102,7 +102,7 @@ public class UpToDateManual extends TestCase {
         Connection conn;
         try {
             conn = getConnection();
-            updater.initialize(conn);
+            updater.initialize(conn, "");
             for (Iterator iterator = changes.keySet().iterator(); iterator.hasNext();) {
                 String desc = (String) iterator.next();
                 boolean updateRequired = updater.update(desc, (String) changes.get(desc));
@@ -129,7 +129,7 @@ public class UpToDateManual extends TestCase {
         Connection conn;
         try {
             conn = getConnection();
-            updater.initialize(conn);
+            updater.initialize(conn, "");
             boolean updateRequired = updater.update( source1, sql);
             assertTrue(updateRequired);
             updateRequired = updater.update( source2, sql);
@@ -159,7 +159,7 @@ public class UpToDateManual extends TestCase {
         ResultSet rs = null;
         try {
             conn = getConnection();
-            updater.initialize(conn);
+            updater.initialize(conn, "");
             boolean updateRequired = updater.update( source1, sql1);
             assertTrue(updateRequired);
             updateRequired = updater.update( source2, sql2);
@@ -188,7 +188,7 @@ public class UpToDateManual extends TestCase {
         changes.put(name, sql);
         try {
         Connection conn = getConnection();
-        updater.initialize(conn);
+        updater.initialize(conn, "");
         for (Iterator iterator = changes.keySet().iterator(); iterator.hasNext();) {
             String desc = (String) iterator.next();
             boolean updateRequired = updater.update(desc, (String) changes.get(desc));

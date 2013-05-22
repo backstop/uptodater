@@ -102,9 +102,10 @@ public class Updater {
      * Must be called prior to db operations; will load the existing commands.
      *
      * @param con the database connection to use
+     * @param sessionInitializationSql any session initialization sql you want to run
      * @throws SQLException if there is a problem getting a connection the existing commands from the database
      */
-    public void initialize(Connection con) throws SQLException {
+    public void initialize(Connection con, String sessionInitializationSql) throws SQLException {
         this.conn = con;
         String sql = "Select sqltext from "+tableName;
 
@@ -120,7 +121,20 @@ public class Updater {
             DBUtil.close(rs);
             DBUtil.close(pstmt);
         }
+
+        initializeSession(sessionInitializationSql);
+
         now = new Date(System.currentTimeMillis());
+    }
+
+    private void initializeSession(String sessionInitializationSql) throws SQLException {
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+            stmt.execute(sessionInitializationSql);
+        } finally {
+            DBUtil.close(stmt);
+        }
     }
 
     /**
