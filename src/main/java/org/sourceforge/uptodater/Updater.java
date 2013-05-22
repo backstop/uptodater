@@ -8,6 +8,7 @@ package org.sourceforge.uptodater;
  * @author rapruitt
  */
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -128,12 +129,14 @@ public class Updater {
     }
 
     private void initializeSession(String sessionInitializationSql) throws SQLException {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-            stmt.execute(sessionInitializationSql);
-        } finally {
-            DBUtil.close(stmt);
+        if (StringUtils.isNotBlank(sessionInitializationSql)) {
+            Statement stmt = null;
+            try {
+                stmt = conn.createStatement();
+                stmt.execute(sessionInitializationSql);
+            } finally {
+                DBUtil.close(stmt);
+            }
         }
     }
 
