@@ -28,7 +28,9 @@ public class ConfigData {
 
     public String get(final String propertyName, final String defaultValue) {
         String key = propertyName.trim();
-        if(configuration.containsKey(key)) {
+        if(System.getProperties().containsKey(propertyName)) {
+            return System.getProperty(propertyName);
+        } else if(configuration.containsKey(key)) {
             return configuration.get(key);
         }
         else {
