@@ -26,11 +26,11 @@ public class SimpleUpToDateRunner extends UpToDateRunner {
     @Override
     protected Connection getConnection() {
         try {
-            System.out.printf("Connecting with %s\n  user: '%s'\n  pass: '%s'\n", jdbc, user, pass);
+            System.out.printf("Connecting with %s\n  user: '%s'\n", jdbc, user);
             return DriverManager.getConnection(jdbc, user, pass);
         } catch (SQLException e) {
             throw new ConfigurationException(
-                    String.format("Unable to connect to database with %s/%s/%s", jdbc, user, pass), e);
+                    String.format("Unable to connect to database with %s/%s", jdbc, user), e);
         }
     }
 
