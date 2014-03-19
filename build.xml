@@ -4,25 +4,13 @@
     <property name="projectName" value="UpToDater"/>
     <property name="src" value="src/main"/>
     <property name="lib" value="lib"/>
+    <property name="version" value="50"/>
 
     <path id="project.class.path">
         <fileset dir="${lib}" includes="*.jar"/>
     </path>
 
     <target name="getRevision">
-        <exec executable="svn" outputproperty="version">
-            <arg line="info"/>
-            <redirector>
-                <outputfilterchain>
-                    <linecontainsregexp>
-                        <regexp pattern='^Revision'/>
-                    </linecontainsregexp>
-                    <tokenfilter>
-                        <replaceregex pattern='[\D]+([\d]+)' replace="\1"/>
-                    </tokenfilter>
-                </outputfilterchain>
-            </redirector>
-        </exec>
         <property name="uptodaterJar" value="${dist}/${projectName}-r${version}.jar"/>
     </target>
 
