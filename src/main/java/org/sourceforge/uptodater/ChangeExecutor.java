@@ -21,9 +21,6 @@ public abstract class ChangeExecutor {
 
     public static final Pattern NEXT_STATEMENT_IGNORE_HINT = Pattern.compile("^--\\s*statement\\.optional\\s*$", Pattern.MULTILINE);
 
-    @Deprecated
-    public static final Pattern NEXT_STATEMENT_IGNORE_HINT_OLD =  Pattern.compile("^--\\s*optional\\s*$", Pattern.MULTILINE);
-
     public boolean isOptional() {
         return optional;
     }
@@ -60,8 +57,7 @@ public abstract class ChangeExecutor {
             changeExecutor = new StatementChangeExecutor(sqlText);
         }
         // check flags
-        if (NEXT_STATEMENT_IGNORE_HINT.matcher(sqlText).lookingAt() ||
-            NEXT_STATEMENT_IGNORE_HINT_OLD.matcher(sqlText).lookingAt()) {
+        if (NEXT_STATEMENT_IGNORE_HINT.matcher(sqlText).lookingAt()) {
             changeExecutor.setOptional(true);
         }
         return changeExecutor;
