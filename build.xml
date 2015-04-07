@@ -4,7 +4,7 @@
     <property name="projectName" value="UpToDater"/>
     <property name="src" value="src/main"/>
     <property name="lib" value="lib"/>
-    <property name="version" value="52"/>
+    <property name="version" value="53"/>
 
     <path id="project.class.path">
         <fileset dir="${lib}" includes="*.jar"/>
