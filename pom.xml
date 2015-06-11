@@ -3,10 +3,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>UpToDater</groupId>
+  <groupId>org.sourceforge.uptodater</groupId>
   <artifactId>UpToDater</artifactId>
   <name>UpToDater</name>
-  <version>0.9.3</version>
+  <version>0.9.4</version>
 
   <organization>
     <name>sourceforge</name>
