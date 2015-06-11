@@ -18,17 +18,6 @@ public class ChangeExecutorTest extends TestCase {
 
     }
 
-    public void testOptionalHintOld() {
-        String optionalThing = "-- optional\n" +
-                " this ain't even sql";
-        ChangeExecutor ce = ChangeExecutor.createChangeExecutor(optionalThing);
-        assertTrue(ce.isOptional());
-        String notOptionalThing = "\n" +
-                " this ain't even sql";
-        ce = ChangeExecutor.createChangeExecutor(notOptionalThing);
-        assertFalse(ce.isOptional());
-    }
-
     public void testOptionalHint() {
         String optionalThing = "-- statement.optional\n" +
                 " this ain't even sql";
