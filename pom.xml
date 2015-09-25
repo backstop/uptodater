@@ -20,6 +20,11 @@
               <artifactId>wagon-ssh</artifactId>
               <version>2.10</version>
           </extension>
+          <extension>
+              <groupId>org.apache.maven.wagon</groupId>
+              <artifactId>wagon-ssh-external</artifactId>
+              <version>2.10</version>
+          </extension>
       </extensions>
       <plugins>
           <plugin>
@@ -157,7 +162,7 @@
       <repository>
           <id>ivy</id>
           <name>Backstop Local Repository</name>
-          <url>scpexe://ivy.backstopsolutions/var/www/html/ivy/</url>
+          <url>scp://ivy.backstopsolutions/var/www/html/ivy/</url>
       </repository>
   </distributionManagement>
 </project>
