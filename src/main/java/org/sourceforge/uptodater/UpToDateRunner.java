@@ -237,7 +237,7 @@ public abstract class UpToDateRunner  {
             }
             logger.info((dryRun ? "Would have " : "") + "Executed " + newScriptsPresent+ " new scripts.");
         } catch (UpdateFailureException e) {
-            logger.error("\n\nUpdate(s) " + e.getOriginalSql() + " failed \n\n");
+            logger.error("\n\nUpdate(s) " + e.getOriginalSql() + " failed \n\n", e);
             throw new ConfigurationException("Update(s) " + e.getOriginalSql() + " failed", e.getCause());
         } catch (Exception e) {
             String eMessage = "Error running update(s) from src " + getUpDateZip() + ": " + e.getClass().getName() + ": " + e.getMessage();
