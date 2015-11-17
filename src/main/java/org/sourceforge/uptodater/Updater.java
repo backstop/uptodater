@@ -9,23 +9,19 @@ package org.sourceforge.uptodater;
  */
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.*;
+import java.sql.Date;
+import java.util.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 
 /**
@@ -45,7 +41,7 @@ public class Updater {
     public static final String DEFAULT_TABLE_NAME = "uptodater";
 
     //Support objects.
-    private static Log logger = LogFactory.getLog(Updater.class);
+    private static Logger logger = LoggerFactory.getLogger(Updater.class);
 
     private Connection conn;
     private Set<String> existingCommands = new HashSet<String>();
