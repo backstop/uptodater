@@ -1,13 +1,13 @@
 package org.sourceforge.uptodater;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StatementPreparer {
-    private Log logger = LogFactory.getLog(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass());
     private final ConfigData configData;
     private final Pattern pattern;
 
@@ -27,7 +27,7 @@ public class StatementPreparer {
             if(replacement == null) {
                 String errorMessage = "Configuration error, expecting property " + key + ", but was not found.  Does your sql have a string with unescaped {braces}?";
                 ConfigurationException exception = new ConfigurationException(errorMessage);
-                logger.error(exception);
+                logger.error(exception.getMessage(), exception);
                 throw exception;
             }
             toReplace = toReplace.replace(match, replacement);
