@@ -1,163 +1,148 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.sourceforge.uptodater</groupId>
-  <artifactId>UpToDater</artifactId>
-  <name>UpToDater</name>
-  <version>0.9.6</version>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.sourceforge.uptodater</groupId>
+    <artifactId>UpToDater</artifactId>
+    <name>UpToDater</name>
+    <version>0.9.6</version>
 
-  <organization>
-    <name>sourceforge</name>
-    <url>http://sourceforge.net</url>
-  </organization>
+    <organization>
+        <name>sourceforge</name>
+        <url>http://sourceforge.net</url>
+    </organization>
 
-  <build>
-      <extensions>
-          <extension>
-              <groupId>org.apache.maven.wagon</groupId>
-              <artifactId>wagon-ssh-external</artifactId>
-              <version>2.10</version>
-          </extension>
-      </extensions>
-      <plugins>
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <version>3.3</version>
-              <configuration>
-                  <source>1.5</source>
-                  <target>1.5</target>
-              </configuration>
-          </plugin>
-      </plugins>
+    <properties>
+        <slf4j.version>1.7.12</slf4j.version>
+    </properties>
 
-      <testResources>
-          <testResource>
-              <directory>drivers</directory>
-          </testResource>
-      </testResources>
-  </build>
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh-external</artifactId>
+                <version>2.10</version>
+            </extension>
+        </extensions>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+        </plugins>
 
-  <inceptionYear>2003</inceptionYear>
-  <description>Database DML Update Tool</description>
-  <url>http://UpToDater.sourceforge.net</url>
+        <testResources>
+            <testResource>
+                <directory>drivers</directory>
+            </testResource>
+        </testResources>
+    </build>
 
-  <scm>
-    <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/uptodater:uptodater</connection>
-    <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/uptodater</url>
-  </scm>
+    <inceptionYear>2003</inceptionYear>
+    <description>Database DML Update Tool</description>
+    <url>http://UpToDater.sourceforge.net</url>
 
-  <mailingLists>
-    <mailingList>
-      <name>UpToDater User Mailing list</name>
-      <subscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-user</subscribe>
-      <unsubscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-user</unsubscribe>
-      <archive>http://sourceforge.net/mailarchive/forum.php?forum=uptodater-user</archive>
-    </mailingList>
-    <mailingList>
-      <name>UpToDater Developer Mailing list</name>
-      <subscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-devel</subscribe>
-      <unsubscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-devel</unsubscribe>
-      <archive>http://sourceforge.net/mailarchive/forum.php?forum=uptodater-devel</archive>
-    </mailingList>
-    <mailingList>
-      <name>UpToDater Cvs Mailing list</name>
-      <subscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-cvs</subscribe>
-      <unsubscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-cvs</unsubscribe>
-      <archive>http://sourceforge.net/mailarchive/forum.php?forum=uptodater-cvs</archive>
-    </mailingList>
-  </mailingLists>
+    <scm>
+        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/uptodater:uptodater</connection>
+        <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/uptodater</url>
+    </scm>
 
-  <developers>
-     <developer>
-        <name>Andy Pruitt</name>
-        <id>rapruitt</id>
-        <email>rapruitt AT users.sourceforge.net</email>
-        <organization>Sourceforge</organization>
-        <timezone>-6</timezone>
-      </developer>
-     <developer>
-        <name>Jeff Zellman</name>
-        <id>jzellman</id>
-        <email>jzellman AT users.sourceforge.net</email>
-        <organization>Sourceforge</organization>
-        <timezone>-6</timezone>
-      </developer>
-  </developers>
+    <mailingLists>
+        <mailingList>
+            <name>UpToDater User Mailing list</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-user</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-user</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=uptodater-user</archive>
+        </mailingList>
+        <mailingList>
+            <name>UpToDater Developer Mailing list</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-devel</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-devel</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=uptodater-devel</archive>
+        </mailingList>
+        <mailingList>
+            <name>UpToDater Cvs Mailing list</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-cvs</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-cvs</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=uptodater-cvs</archive>
+        </mailingList>
+    </mailingLists>
 
-  <dependencies>
-      <dependency>
-          <groupId>commons-lang</groupId>
-          <artifactId>commons-lang</artifactId>
-          <version>2.0</version>
-      </dependency>
-      <dependency>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-          <version>1.0.4</version>
-          <exclusions>
-              <exclusion>
-                  <artifactId>avalon-framework</artifactId>
-                  <groupId>avalon-framework</groupId>
-              </exclusion>
-              <exclusion>
-                  <artifactId>logkit</artifactId>
-                  <groupId>logkit</groupId>
-              </exclusion>
-              <exclusion>
-                  <artifactId>log4j</artifactId>
-                  <groupId>log4j</groupId>
-              </exclusion>
-          </exclusions>
-      </dependency>
-      <dependency>
-          <groupId>log4j</groupId>
-          <artifactId>log4j</artifactId>
-          <version>1.2.8</version>
-      </dependency>
-      <dependency>
-          <groupId>net.sf.jopt-simple</groupId>
-          <artifactId>jopt-simple</artifactId>
-          <version>3.2</version>
-      </dependency>
+    <developers>
+        <developer>
+            <name>Andy Pruitt</name>
+            <id>rapruitt</id>
+            <email>rapruitt AT users.sourceforge.net</email>
+            <organization>Sourceforge</organization>
+            <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>Jeff Zellman</name>
+            <id>jzellman</id>
+            <email>jzellman AT users.sourceforge.net</email>
+            <organization>Sourceforge</organization>
+            <timezone>-6</timezone>
+        </developer>
+    </developers>
 
-      <dependency>
-          <groupId>servletapi</groupId>
-          <artifactId>servletapi</artifactId>
-          <version>2.3</version>
-          <scope>provided</scope>
-      </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jopt-simple</groupId>
+            <artifactId>jopt-simple</artifactId>
+            <version>3.2</version>
+        </dependency>
 
-      <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>3.8.1</version>
-          <scope>test</scope>
-      </dependency>
-      <dependency>
-          <groupId>jmock</groupId>
-          <artifactId>jmock</artifactId>
-          <version>1.0.1</version>
-          <scope>test</scope>
-      </dependency>
-  </dependencies>
+        <dependency>
+            <groupId>servletapi</groupId>
+            <artifactId>servletapi</artifactId>
+            <version>2.3</version>
+            <scope>provided</scope>
+        </dependency>
 
-  <reports>
-    <report>maven-license-plugin</report>
-    <report>maven-changes-plugin</report>
-    <report>maven-javadoc-plugin</report>
-    <report>maven-pmd-plugin</report>
-    <report>maven-junit-report-plugin</report>
-    <report>maven-junit-report-plugin</report>
-  </reports>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jmock</groupId>
+            <artifactId>jmock</artifactId>
+            <version>1.0.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-  <distributionManagement>
-      <repository>
-          <id>ivy</id>
-          <name>Backstop Local Repository</name>
-          <url>scpexe://ivy.backstopsolutions/var/www/html/ivy/</url>
-      </repository>
-  </distributionManagement>
+    <reports>
+        <report>maven-license-plugin</report>
+        <report>maven-changes-plugin</report>
+        <report>maven-javadoc-plugin</report>
+        <report>maven-pmd-plugin</report>
+        <report>maven-junit-report-plugin</report>
+        <report>maven-junit-report-plugin</report>
+    </reports>
+
+    <distributionManagement>
+        <repository>
+            <id>ivy</id>
+            <name>Backstop Local Repository</name>
+            <url>scpexe://ivy.backstopsolutions/var/www/html/ivy/</url>
+        </repository>
+    </distributionManagement>
 </project>
