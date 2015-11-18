@@ -1,14 +1,16 @@
 package org.sourceforge.uptodater;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.regex.Pattern;
 
 public abstract class ChangeExecutor {
-
-    private static Log logger = LogFactory.getLog(ChangeExecutor.class);
+    private static Logger logger = LoggerFactory.getLogger(ChangeExecutor.class);
 
     public static interface DeferredStatement {
         void doIt() throws SQLException;

@@ -1,8 +1,8 @@
 package org.sourceforge.uptodater;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -22,7 +22,7 @@ public abstract class UpToDateRunner  {
     /**
     * Support Objects
     */
-    protected Log logger;
+    protected Logger logger;
 
     protected static final String UPTODATER_SESSION_INITIALIZATION_SQL_KEY = "uptodater.sessionInitializationSql";
     protected static final String IS_ACTIVE_KEY = "uptodater.active";
@@ -38,7 +38,7 @@ public abstract class UpToDateRunner  {
     }
 
     protected UpToDateRunner(ConfigData configData) {
-        logger = LogFactory.getLog(getClass());
+        logger = LoggerFactory.getLogger(getClass());
         this.configData = configData == null ? new ConfigData() : configData;
     }
 
