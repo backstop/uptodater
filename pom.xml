@@ -46,50 +46,12 @@
 
     <inceptionYear>2003</inceptionYear>
     <description>Database DML Update Tool</description>
-    <url>http://UpToDater.sourceforge.net</url>
+    <url>https://github.com/backstop/uptodater</url>
 
     <scm>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/uptodater:uptodater</connection>
         <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/uptodater</url>
     </scm>
-
-    <mailingLists>
-        <mailingList>
-            <name>UpToDater User Mailing list</name>
-            <subscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-user</subscribe>
-            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-user</unsubscribe>
-            <archive>http://sourceforge.net/mailarchive/forum.php?forum=uptodater-user</archive>
-        </mailingList>
-        <mailingList>
-            <name>UpToDater Developer Mailing list</name>
-            <subscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-devel</subscribe>
-            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-devel</unsubscribe>
-            <archive>http://sourceforge.net/mailarchive/forum.php?forum=uptodater-devel</archive>
-        </mailingList>
-        <mailingList>
-            <name>UpToDater Cvs Mailing list</name>
-            <subscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-cvs</subscribe>
-            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/uptodater-cvs</unsubscribe>
-            <archive>http://sourceforge.net/mailarchive/forum.php?forum=uptodater-cvs</archive>
-        </mailingList>
-    </mailingLists>
-
-    <developers>
-        <developer>
-            <name>Andy Pruitt</name>
-            <id>rapruitt</id>
-            <email>rapruitt AT users.sourceforge.net</email>
-            <organization>Sourceforge</organization>
-            <timezone>-6</timezone>
-        </developer>
-        <developer>
-            <name>Jeff Zellman</name>
-            <id>jzellman</id>
-            <email>jzellman AT users.sourceforge.net</email>
-            <organization>Sourceforge</organization>
-            <timezone>-6</timezone>
-        </developer>
-    </developers>
 
     <dependencies>
         <dependency>
