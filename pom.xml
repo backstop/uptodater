@@ -14,7 +14,8 @@
     </organization>
 
     <properties>
-        <slf4j.version>1.7.12</slf4j.version>
+        <java.source.version>1.5</java.source.version>
+        <java.target.version>1.5</java.target.version>
     </properties>
 
     <build>
@@ -31,8 +32,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
+                    <source>${java.source.version}</source>
+                    <target>${java.target.version}</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -49,8 +50,7 @@
     <url>https://github.com/backstop/uptodater</url>
 
     <scm>
-        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/uptodater:uptodater</connection>
-        <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/uptodater</url>
+        <developerConnection>scm:git:git@github.com:backstop/uptodater</developerConnection>
     </scm>
 
     <dependencies>
@@ -62,7 +62,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
+            <version>1.7.12</version>
         </dependency>
         <dependency>
             <groupId>net.sf.jopt-simple</groupId>
@@ -99,12 +99,4 @@
         <report>maven-junit-report-plugin</report>
         <report>maven-junit-report-plugin</report>
     </reports>
-
-    <distributionManagement>
-        <repository>
-            <id>ivy</id>
-            <name>Backstop Local Repository</name>
-            <url>scpexe://ivy.backstopsolutions/var/www/html/ivy/</url>
-        </repository>
-    </distributionManagement>
 </project>
