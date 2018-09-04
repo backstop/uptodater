@@ -74,7 +74,6 @@ public class UpdaterTest {
 
     @Test
     public void doNotUpdateSameDescription() throws SQLException {
-        assertTrue(true);
         Updater updater = new Updater(TABLE_NAME);
         updater.initialize(getConnection(), "");
         String createTable = "create table test_table (\n"
