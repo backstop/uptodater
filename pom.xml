@@ -36,12 +36,6 @@
                 </configuration>
             </plugin>
         </plugins>
-
-        <testResources>
-            <testResource>
-                <directory>drivers</directory>
-            </testResource>
-        </testResources>
     </build>
 
     <inceptionYear>2003</inceptionYear>
