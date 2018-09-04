@@ -44,7 +44,7 @@ public class Updater {
     private static Logger logger = LoggerFactory.getLogger(Updater.class);
 
     private Connection conn;
-    private Set<String> existingCommands = new HashSet<String>();
+    private Set<String> existingDescriptions = new HashSet<String>();
     private MessageDigest md;
     private Date now;
     private String tableName;
@@ -104,7 +104,7 @@ public class Updater {
      */
     public void initialize(Connection con, String sessionInitializationSql) throws SQLException {
         this.conn = con;
-        String sql = "Select sqltext from "+tableName;
+        String sql = "Select description from "+tableName;
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -112,7 +112,7 @@ public class Updater {
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                existingCommands.add(rs.getString("sqltext"));
+                existingDescriptions.add(rs.getString("description"));
             }
         } finally {
             DBUtil.close(rs);
@@ -141,7 +141,7 @@ public class Updater {
      */
     public void close() {
         DBUtil.close(conn);
-        existingCommands.clear();
+        existingDescriptions.clear();
     }
 
     /**
@@ -176,37 +176,38 @@ public class Updater {
 //        assert description != null;
 //        assert text != null;
 
-        if (!alreadyApplied(text)) {
-            PreparedStatement pstmt = null;
-            md.reset();
-            md.update(text.getBytes());
-            try {
-                pstmt = conn.prepareStatement("insert into "+tableName+"(insert_date , sqltext, description, sqltext_hash) values(?, ?,  ?, ?) ");
-                pstmt.setDate(1, insertDate);
-                pstmt.setString(2, text);
-                pstmt.setString(3, description);
-                pstmt.setString(4, new String(md.digest()));
-                pstmt.executeUpdate();
-            } finally {
-                DBUtil.close(pstmt);
-            }
-            existingCommands.add(text);
-            return true;
+        if (alreadyApplied(description)) {
+            return false;
         }
-        return false;
+
+        PreparedStatement pstmt = null;
+        md.reset();
+        md.update(text.getBytes());
+        try {
+            pstmt = conn.prepareStatement("insert into "+tableName+"(insert_date , sqltext, description, sqltext_hash) values(?, ?,  ?, ?) ");
+            pstmt.setDate(1, insertDate);
+            pstmt.setString(2, text);
+            pstmt.setString(3, description);
+            pstmt.setString(4, new String(md.digest()));
+            pstmt.executeUpdate();
+        } finally {
+            DBUtil.close(pstmt);
+        }
+        existingDescriptions.add(description);
+        return true;
     }
 
-    public boolean alreadyApplied(String text) {
-        if (!existingCommands.contains(text)) {
+    boolean alreadyApplied(String description) {
+        if (existingDescriptions.contains(description)) {
+            return true;
+        } else {
             // Some databases - eg sqlserver - have odd case sensitivities;
             // this check should not be necessary
-            for(String cmd : existingCommands) {
-                if (cmd.equalsIgnoreCase(text)) {
+            for (String cmd : existingDescriptions) {
+                if (cmd.equalsIgnoreCase(description)) {
                     return true;
                 }
             }
-        } else {
-            return true;
         }
         return false;
     }
