@@ -200,13 +200,13 @@ public class Updater {
     boolean alreadyApplied(String description) {
         if (existingDescriptions.contains(description)) {
             return true;
-        } else {
-            // Some databases - eg sqlserver - have odd case sensitivities;
-            // this check should not be necessary
-            for (String cmd : existingDescriptions) {
-                if (cmd.equalsIgnoreCase(description)) {
-                    return true;
-                }
+        }
+
+        // Some databases - eg sqlserver - have odd case sensitivities;
+        // this check should not be necessary
+        for (String cmd : existingDescriptions) {
+            if (cmd.equalsIgnoreCase(description)) {
+                return true;
             }
         }
         return false;
