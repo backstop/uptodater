@@ -83,4 +83,16 @@ public class UpdaterTest {
         updater.update("file1.sql", createTable + " -- and a slight change");
         assertEquals(1, updater.getUnappliedChanges().size());
     }
+
+    @Test
+    public void doNotUpdateSameContents() throws SQLException {
+        Updater updater = new Updater(TABLE_NAME);
+        updater.initialize(getConnection(), "");
+        String createTable = "create table test_table (\n"
+                + "  id int auto_increment not null\n"
+                + ")";
+        updater.update("file1.sql", createTable);
+        updater.update("file2.sql", createTable);
+        assertEquals(1, updater.getUnappliedChanges().size());
+    }
 }

@@ -222,7 +222,7 @@ public abstract class UpToDateRunner  {
             boolean noUpdate = dryRun || isInactive();
             for(String source : scriptsMap.keySet()) {
                 String contents =  scriptsMap.get(source);
-                if (noUpdate && !updater.alreadyApplied(source)) {
+                if (noUpdate && !updater.alreadyApplied(source, contents)) {
                     logApplied(appliedScriptNames, source, contents);
                 } else if (updater.update(source, contents)) {
                     logApplied(appliedScriptNames, source, contents);

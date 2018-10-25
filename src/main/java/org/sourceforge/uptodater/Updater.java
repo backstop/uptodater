@@ -44,11 +44,11 @@ public class Updater {
     private static Logger logger = LoggerFactory.getLogger(Updater.class);
 
     private Connection conn;
+    private Set<String> existingCommands = new HashSet<String>();
     private Set<String> existingDescriptions = new HashSet<String>();
     private MessageDigest md;
     private Date now;
     private String tableName;
-
 
     public Updater(String tableName) {
         this.tableName = tableName;
@@ -104,7 +104,7 @@ public class Updater {
      */
     public void initialize(Connection con, String sessionInitializationSql) throws SQLException {
         this.conn = con;
-        String sql = "Select description from "+tableName;
+        String sql = "Select description, sqltext from "+tableName;
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -113,6 +113,7 @@ public class Updater {
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 existingDescriptions.add(rs.getString("description"));
+                existingCommands.add(rs.getString("sqltext"));
             }
         } finally {
             DBUtil.close(rs);
@@ -142,6 +143,7 @@ public class Updater {
     public void close() {
         DBUtil.close(conn);
         existingDescriptions.clear();
+        existingCommands.clear();
     }
 
     /**
@@ -176,7 +178,7 @@ public class Updater {
 //        assert description != null;
 //        assert text != null;
 
-        if (alreadyApplied(description)) {
+        if (alreadyApplied(description, text)) {
             return false;
         }
 
@@ -194,21 +196,29 @@ public class Updater {
             DBUtil.close(pstmt);
         }
         existingDescriptions.add(description);
+        existingCommands.add(text);
         return true;
     }
 
-    boolean alreadyApplied(String description) {
-        if (existingDescriptions.contains(description)) {
+    boolean alreadyApplied(String description, String text) {
+        if (existingDescriptions.contains(description) || existingCommands.contains(text)) {
             return true;
         }
 
         // Some databases - eg sqlserver - have odd case sensitivities;
         // this check should not be necessary
-        for (String cmd : existingDescriptions) {
+        for (String desc : existingDescriptions) {
+            if (desc.equalsIgnoreCase(description)) {
+                return true;
+            }
+        }
+
+        for (String cmd : existingCommands) {
             if (cmd.equalsIgnoreCase(description)) {
                 return true;
             }
         }
+
         return false;
     }
 
